@@ -1,5 +1,9 @@
 const helpers = require("./helpers")
 const logger = require("./logger");
+const api = {};
+
+api["/api/duck"] = require("./api/duck");
+api["/api/cat"] = require("./api/cat");
 
 module.exports = function(req, res){ // 2 argument
 
@@ -14,6 +18,25 @@ module.exports = function(req, res){ // 2 argument
         // helpers.sendFile(req, res, "./static/" + result[0]);
         helpers.streamFile(req, res, "./static/" + result[0]);
         return;
+    }
+
+    //hvis jeg er her, der ikke fundet et match
+    // const apiRX = /^\/api\/\w+$/;
+    // const apiRX = /^\/api\/\w+\/*\w+\/*\w+$/;
+    const apiRX = /^(\/api\/\w+)(\/\w+)?$/;
+    result = endpoint.match(apiRX);
+    console.log(result);
+    if(result){
+        //hvis jeg er her, der fundet et match
+        if(api[result[1]]){
+            if(api[result[1]][req.method]){
+                //hvis jeg er her, er der fundet en metode der matcher req.method
+                api[result[1]][req.method].handler(req, res, result[2]);
+                return;
+            }
+            helpers.send(req, res, {msg: "Metode ikke tilladt her"}, 405);
+            return;
+        }
     }
 
     console.log(result);
