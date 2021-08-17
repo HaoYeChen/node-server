@@ -1,0 +1,25 @@
+{
+  "name": "nodeserver",
+  "version": "0.0.1",
+  "description": "H5 node scripting",
+  "main": "server.js",
+  "dependencies": {
+    "mysql2": "^2.3.0",
+    "nodemon": "^2.0.12"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HaoYeChen/node-server.git"
+  },
+  "author": "Hao",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HaoYeChen/node-server/issues"
+  },
+  "homepage": "https://github.com/HaoYeChen/node-server#readme"
+}

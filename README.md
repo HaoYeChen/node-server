@@ -3,15 +3,17 @@ H5 node scripting
 
 Opbygger en node server fra grunden
 
-# Git commandoer:
+# Git commandos:
 
-ls - tjekker filerne
+ls - checking files
 
-git status - tjekker status på ændringer
+git status - checking changes on status
 
 
-git add . - tilføjere ændringer
+git add . - adding changes
 
-git commit - commit ændringer lokalt
+git commit - commit changes lokalt
 
-git push - uploader ændringer til github
+git push - uploader changes to github
+
+npm start - start server
