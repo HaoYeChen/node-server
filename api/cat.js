@@ -4,7 +4,7 @@ const {send} = require("../helpers");
 module.exports = {
     GET: {
         params: ["id"],
-        handler: function(req, res, params){
+        handler: function(req, res, p){
             send(req, res, {says: "Miauw", method: req.method, parm: p}, 200);
         }
     },

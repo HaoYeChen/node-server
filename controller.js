@@ -23,21 +23,35 @@ module.exports = function(req, res){ // 2 argument
     //hvis jeg er her, der ikke fundet et match
     // const apiRX = /^\/api\/\w+$/;
     // const apiRX = /^\/api\/\w+\/*\w+\/*\w+$/;
-    const apiRX = /^(\/api\/\w+)(\/\w+)?$/;
+    //const apiRX = /^(\/api\/\w+)((\/\w+)*)$/; // allows characters and numbers
+    const apiRX = /^(?<route>\/api\/\w+)(?<params>(\/\d+)*)$/; // allows only numbers behind
     result = endpoint.match(apiRX);
     console.log(result);
     if(result){
         //hvis jeg er her, der fundet et match
-        if(api[result[1]]){
-            if(api[result[1]][req.method]){
+        if(api[result.groups.route]){
+            if(api[result.groups.route][req.method]){
                 //hvis jeg er her, er der fundet en metode der matcher req.method
-                api[result[1]][req.method].handler(req, res, result[2]);
+                api[result.groups.route][req.method].handler(req, res, result.groups.params);
                 return;
             }
             helpers.send(req, res, {msg: "Metode ikke tilladt her"}, 405);
             return;
         }
     }
+    
+    // if(result){
+    //     //hvis jeg er her, der fundet et match
+    //     if(api[result[1]]){
+    //         if(api[result[1]][req.method]){
+    //             //hvis jeg er her, er der fundet en metode der matcher req.method
+    //             api[result[1]][req.method].handler(req, res, result[2]);
+    //             return;
+    //         }
+    //         helpers.send(req, res, {msg: "Metode ikke tilladt her"}, 405);
+    //         return;
+    //     }
+    // }
 
     console.log(result);
 

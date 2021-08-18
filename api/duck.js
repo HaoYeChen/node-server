@@ -5,7 +5,9 @@ module.exports = {
     GET: {
         params: ["id"],
         handler: function(req, res, p){
-            send(req, res, {says: "Quack", method: req.method, parm: p}, 200);
+            //if true: there is / replace it & split it or else null
+            let parms = p !== ""? p.replace("/", "").split("/"): null;
+            send(req, res, {says: "Quack", method: req.method, parm: parms}, 200);
         }
     },
     POST: {
